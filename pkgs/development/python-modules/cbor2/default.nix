@@ -11,7 +11,6 @@
   setuptools,
   setuptools-rust,
   setuptools-scm,
-  withCExtensions ? true,
 }:
 
 buildPythonPackage (finalAttrs: {
@@ -54,14 +53,6 @@ buildPythonPackage (finalAttrs: {
     pytest-cov-stub
     pytestCheckHook
   ];
-
-  env = lib.optionalAttrs (!withCExtensions) {
-    CBOR2_BUILD_C_EXTENSION = "0";
-  };
-
-  passthru = {
-    inherit withCExtensions;
-  };
 
   pythonImportsCheck = [ "cbor2" ];
 
